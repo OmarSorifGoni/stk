@@ -1,0 +1,107 @@
+.admin-inbox-entry {
+    padding: 15px 0;
+    border-bottom: 1px solid #e8ecf2;
+}
+
+.admin-inbox-entry:first-child {
+    padding-top: 0;
+}
+
+.admin-inbox-heading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 6px 12px;
+    color: #263550;
+}
+
+.admin-inbox-heading time,
+.admin-inbox-email {
+    color: #78849a;
+    font-size: 12px;
+}
+
+.admin-inbox-email,
+.admin-inbox-body {
+    overflow-wrap: anywhere;
+}
+
+.admin-inbox-body {
+    margin: 9px 0 0;
+    white-space: pre-wrap;
+    color: #35425a;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+#schoolDialog {
+    width: min(480px, calc(100vw - 32px));
+    max-height: calc(100vh - 32px);
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    color: #17233d;
+    box-shadow: 0 20px 70px #17233d33;
+}
+
+#schoolDialog::backdrop {
+    background: #17233d80;
+}
+
+.admin-school-form {
+    display: grid;
+    gap: 16px;
+    padding: 26px;
+}
+
+.admin-school-form h2 {
+    margin: 0 0 4px;
+    font-size: 21px;
+}
+
+.admin-school-form label {
+    display: grid;
+    gap: 7px;
+    color: #526079;
+    font-size: 13px;
+}
+
+.admin-school-form input,
+.admin-school-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #d8deea;
+    border-radius: 5px;
+    background: #fff;
+    color: #17233d;
+    font: inherit;
+}
+
+.admin-school-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.admin-school-cancel,
+.admin-school-edit {
+    padding: 9px 12px;
+    border: 1px solid #d8deea;
+    border-radius: 5px;
+    background: #fff;
+    color: #40506b;
+    cursor: pointer;
+    font: inherit;
+}
+
+.admin-school-edit {
+    padding: 6px 9px;
+    font-size: 12px;
+}
+
+#schoolFormStatus,
+#schoolStatusMessage {
+    color: #b34d42;
+    font-size: 13px;
+}

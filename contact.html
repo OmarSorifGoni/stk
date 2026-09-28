@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<h1>お問い合わせ</h1>
+</header>
+
+<nav>
+<a href="index.html">ホーム</a>
+<a href="university.html">🎓大学情報</a>
+<a href="senmon.html">🎓専門学校情報</a>
+<a href="job.html">✨ アルバイト</a>
+<a href="life.html">🏠生活サポート</a>
+<a href="contact.html">📩お問い合わせ</a>
+</nav>
+
+<div class="container">
+<div class="card">
+<h2>お問い合わせフォーム</h2>
+
+<form id="contactForm">
+<input name="name" type="text" placeholder="名前" maxlength="120" required style="width:100%;padding:12px;margin:10px 0;">
+<input name="email" type="email" placeholder="メール" maxlength="320" required style="width:100%;padding:12px;margin:10px 0;">
+<textarea name="message" placeholder="メッセージ" maxlength="5000" required style="width:100%;padding:12px;height:150px;margin:10px 0;"></textarea>
+
+<button type="submit" class="button" style="border:none;cursor:pointer;">送信</button>
+<p id="formStatus" role="status" aria-live="polite"></p>
+</form>
+
+</div>
+</div>
+
+<footer>
+<p>© 2026 留学生サポートサイト</p>
+</footer>
+
+<script>
+const form = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+form.addEventListener('submit', async event => {
+	event.preventDefault();
+
+	const submitButton = form.querySelector('button[type="submit"]');
+	submitButton.disabled = true;
+	formStatus.textContent = '送信中...';
+
+	try {
+		const response = await fetch('contact-submit.php', {
+			method: 'POST',
+			body: new FormData(form),
+			headers: { Accept: 'application/json' }
+		});
+		if (!response.ok) throw new Error('送信に失敗しました');
+		await response.json();
+		form.reset();
+		formStatus.textContent = 'お問い合わせを送信しました。';
+	} catch (error) {
+		formStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+	} finally {
+		submitButton.disabled = false;
+	}
+});
+</script>
+</body>
+</html>

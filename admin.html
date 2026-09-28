@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理画面 | 留学生サポートサイト</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin-inbox.css">
+</head>
+<body class="admin-body">
+<div class="admin-shell">
+<aside class="admin-sidebar">
+    <a class="admin-brand" href="index.html"><span class="admin-brand-mark">ST</span><span><strong>STUDENT</strong><small>Support Admin</small></span></a>
+    <p class="admin-menu-label">MENU</p>
+    <nav class="admin-menu" aria-label="管理メニュー">
+        <a class="is-active" href="#dashboard"><span>⌂</span>ダッシュボード</a>
+        <a href="#schools"><span>▦</span>学校情報</a>
+        <a href="#messages"><span>✉</span>お問い合わせ</a>
+        <a href="#settings"><span>⚙</span>サイト設定</a>
+    </nav>
+    <div class="admin-sidebar-bottom"><a href="index.html" class="admin-public-link">↗ 公開サイトを見る</a><div class="admin-user"><span class="admin-avatar">管</span><span><strong>管理画面</strong><small>ログイン不要</small></span></div></div>
+</aside>
+<main class="admin-main" id="dashboard">
+    <header class="admin-topbar"><div><p class="admin-eyebrow">ADMINISTRATION</p><h1>管理ダッシュボード</h1><span id="connectionStatus" style="display:block;margin-top:9px;color:#a0a9b8;font-size:10px;font-weight:600">● データベース未接続</span></div><div class="admin-top-actions"><button id="refreshMessages" class="admin-primary-button" type="button">問い合わせを更新</button></div></header>
+    <section class="admin-stats" aria-label="サイト概要">
+        <article class="admin-stat-card"><span class="admin-stat-icon blue">▦</span><div><p>掲載中の学校</p><strong id="publishedSchoolCount">0</strong><small>データベース登録</small></div></article>
+        <article class="admin-stat-card"><span class="admin-stat-icon orange">✉</span><div><p>最近のお問い合わせ</p><strong id="messageCount">0</strong><small>最新50件</small></div></article>
+        <article class="admin-stat-card"><span class="admin-stat-icon purple">◉</span><div><p>今月の訪問者数</p><strong>8,429</strong><small><b>+12.5%</b> 先月比</small></div></article>
+    </section>
+    <section class="admin-content-grid">
+        <article class="admin-panel admin-panel-wide" id="schools"><div class="admin-panel-heading"><div><p class="admin-eyebrow">CONTENT MANAGEMENT</p><h2>学校情報</h2></div><button id="addSchoolButton" class="admin-primary-button" type="button">＋ 学校を追加</button></div><div class="admin-toolbar"><label class="admin-search"><span>⌕</span><input id="schoolSearch" type="search" placeholder="学校名・地域で検索"></label><select id="schoolStatus" aria-label="公開状態"><option value="all">すべての状態</option><option value="published">公開中</option><option value="draft">下書き</option></select></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>学校名</th><th>カテゴリー</th><th>地域</th><th>更新日</th><th>状態</th><th></th></tr></thead><tbody id="schoolRows"></tbody></table></div><div class="admin-panel-footer"><span id="schoolRowsSummary">学校情報を読み込み中...</span><span id="schoolStatusMessage" role="status"></span></div></article>
+        <article class="admin-panel" id="messages"><div class="admin-panel-heading"><div><p class="admin-eyebrow">INBOX</p><h2>お問い合わせ</h2></div></div><div id="adminMessages" class="admin-message-list" aria-live="polite"><p>読み込み中...</p></div></article>
+    </section>
+    <section class="admin-lower-grid"><article class="admin-panel"><div class="admin-panel-heading"><div><p class="admin-eyebrow">RECENT ACTIVITY</p><h2>最近の更新</h2></div><button class="admin-more" type="button" aria-label="最近の更新メニュー">•••</button></div><ul class="admin-activity-list"><li><span class="activity-dot green"></span><span><strong>早稲田大学</strong>の情報を更新しました<small>田中 管理者 · 2時間前</small></span></li><li><span class="activity-dot blue"></span><span>新しい学校情報を追加しました<small>田中 管理者 · 昨日</small></span></li><li><span class="activity-dot orange"></span><span>サイト設定を更新しました<small>田中 管理者 · 2日前</small></span></li></ul></article><article class="admin-panel admin-quick-panel" id="settings"><div class="admin-panel-heading"><div><p class="admin-eyebrow">QUICK ACTIONS</p><h2>クイック操作</h2></div></div><div class="admin-quick-actions"><button type="button" onclick="alert('学校情報の追加フォームを準備中です')"><span>＋</span>学校を追加</button><button type="button"><span>✉</span>問い合わせを見る</button><button type="button"><span>⚙</span>設定を開く</button></div></article></section>
+</main>
+</div>
+<dialog id="schoolDialog" aria-labelledby="schoolDialogTitle">
+    <form id="schoolForm" class="admin-school-form">
+        <h2 id="schoolDialogTitle">学校を追加</h2>
+        <input name="id" type="hidden">
+        <label>学校名<input name="name" type="text" maxlength="200" required></label>
+        <label>カテゴリー<select name="category" required><option value="大学">大学</option><option value="専門学校">専門学校</option></select></label>
+        <label>地域<input name="region" type="text" maxlength="160" placeholder="例: 東京都新宿区" required></label>
+        <label>公開状態<select name="status" required><option value="draft">下書き</option><option value="published">公開中</option></select></label>
+        <p id="schoolFormStatus" role="status" aria-live="polite"></p>
+        <div class="admin-school-form-actions"><button id="cancelSchoolButton" class="admin-school-cancel" type="button">キャンセル</button><button id="saveSchoolButton" class="admin-primary-button" type="submit">保存</button></div>
+    </form>
+</dialog>
+<script>
+const connectionStatus = document.getElementById('connectionStatus');
+const schoolRows = document.getElementById('schoolRows');
+const schoolDialog = document.getElementById('schoolDialog');
+const schoolForm = document.getElementById('schoolForm');
+const schoolFormStatus = document.getElementById('schoolFormStatus');
+const searchInput = document.getElementById('schoolSearch');
+const statusSelect = document.getElementById('schoolStatus');
+let schools = [];
+
+function formatSchoolDate(dateString) {
+    return new Date(dateString.replace(' ', 'T')).toLocaleDateString('ja-JP');
+}
+
+function renderSchools() {
+    const keyword = searchInput.value.trim().toLocaleLowerCase();
+    const selectedStatus = statusSelect.value;
+    const filteredSchools = schools.filter(school => {
+        const matchesKeyword = `${school.name} ${school.category} ${school.region}`.toLocaleLowerCase().includes(keyword);
+        return matchesKeyword && (selectedStatus === 'all' || school.status === selectedStatus);
+    });
+
+    schoolRows.replaceChildren();
+    document.getElementById('publishedSchoolCount').textContent = schools.filter(school => school.status === 'published').length;
+    document.getElementById('schoolRowsSummary').textContent = `全 ${schools.length} 件中 ${filteredSchools.length} 件を表示`;
+
+    if (!filteredSchools.length) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 6;
+        cell.textContent = schools.length ? '条件に一致する学校はありません。' : '学校情報がありません。「学校を追加」から登録してください。';
+        row.append(cell);
+        schoolRows.append(row);
+        return;
+    }
+
+    filteredSchools.forEach(school => {
+        const row = document.createElement('tr');
+        const nameCell = document.createElement('td');
+        const name = document.createElement('strong');
+        name.textContent = school.name;
+        const id = document.createElement('small');
+        id.textContent = `ID: SCH-${String(school.id).padStart(4, '0')}`;
+        nameCell.append(name, id);
+
+        const categoryCell = document.createElement('td');
+        categoryCell.textContent = school.category;
+        const regionCell = document.createElement('td');
+        regionCell.textContent = school.region;
+        const updatedCell = document.createElement('td');
+        updatedCell.textContent = formatSchoolDate(school.updated_at);
+        const statusCell = document.createElement('td');
+        const status = document.createElement('span');
+        status.className = `admin-status ${school.status}`;
+        status.textContent = school.status === 'published' ? '公開中' : '下書き';
+        statusCell.append(status);
+
+        const actionCell = document.createElement('td');
+        const editButton = document.createElement('button');
+        editButton.type = 'button';
+        editButton.className = 'admin-school-edit';
+        editButton.dataset.editSchool = school.id;
+        editButton.textContent = '編集';
+        editButton.setAttribute('aria-label', `${school.name}を編集`);
+        actionCell.append(editButton);
+        row.append(nameCell, categoryCell, regionCell, updatedCell, statusCell, actionCell);
+        schoolRows.append(row);
+    });
+}
+
+async function loadSchools() {
+    document.getElementById('schoolStatusMessage').textContent = '';
+    try {
+        const response = await fetch('admin-schools.php', { cache: 'no-store' });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || '学校情報を読み込めませんでした');
+        schools = result.schools;
+        renderSchools();
+        connectionStatus.textContent = '● データベース接続中';
+        connectionStatus.style.color = '#2a9a6d';
+    } catch (error) {
+        document.getElementById('schoolStatusMessage').textContent = '学校情報を読み込めません。MySQLの設定を確認してください。';
+        connectionStatus.textContent = '● データベース接続エラー';
+        connectionStatus.style.color = '#d86b57';
+    }
+}
+
+function openSchoolDialog(school = null) {
+    schoolForm.reset();
+    schoolForm.elements.id.value = school?.id ?? '';
+    schoolForm.elements.name.value = school?.name ?? '';
+    schoolForm.elements.category.value = school?.category ?? '大学';
+    schoolForm.elements.region.value = school?.region ?? '';
+    schoolForm.elements.status.value = school?.status ?? 'draft';
+    document.getElementById('schoolDialogTitle').textContent = school ? '学校情報を編集' : '学校を追加';
+    schoolFormStatus.textContent = '';
+    schoolDialog.showModal();
+    schoolForm.elements.name.focus();
+}
+
+document.getElementById('addSchoolButton').addEventListener('click', () => openSchoolDialog());
+const quickAddSchoolButton = document.querySelector('.admin-quick-actions button');
+quickAddSchoolButton.onclick = null;
+quickAddSchoolButton.addEventListener('click', () => openSchoolDialog());
+document.getElementById('cancelSchoolButton').addEventListener('click', () => schoolDialog.close());
+schoolRows.addEventListener('click', event => {
+    const editButton = event.target.closest('[data-edit-school]');
+    if (!editButton) return;
+    const school = schools.find(item => item.id === Number(editButton.dataset.editSchool));
+    if (school) openSchoolDialog(school);
+});
+searchInput.addEventListener('input', renderSchools);
+statusSelect.addEventListener('change', renderSchools);
+
+schoolForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    const saveButton = document.getElementById('saveSchoolButton');
+    const formData = new FormData(schoolForm);
+    const id = formData.get('id');
+    const payload = Object.fromEntries(formData);
+    delete payload.id;
+    saveButton.disabled = true;
+    schoolFormStatus.textContent = '保存中...';
+
+    try {
+        const response = await fetch(id ? `admin-schools.php?id=${encodeURIComponent(id)}` : 'admin-schools.php', {
+            method: id ? 'PUT' : 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || '保存できませんでした');
+        schoolDialog.close();
+        await loadSchools();
+    } catch (error) {
+        schoolFormStatus.textContent = error.message || '保存に失敗しました。入力内容を確認してください。';
+    } finally {
+        saveButton.disabled = false;
+    }
+});
+
+async function loadMessages() {
+    const messagesList = document.getElementById('adminMessages');
+    messagesList.replaceChildren();
+    const loading = document.createElement('p');
+    loading.textContent = '読み込み中...';
+    messagesList.append(loading);
+
+    try {
+        const response = await fetch('admin-messages.php', { headers: { Accept: 'application/json' }, cache: 'no-store' });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || '読み込みに失敗しました');
+        const data = result.messages;
+        connectionStatus.textContent = '● データベース接続中';
+        connectionStatus.style.color = '#2a9a6d';
+        document.getElementById('messageCount').textContent = data.length;
+        messagesList.replaceChildren();
+        if (!data.length) {
+            const emptyMessage = document.createElement('p');
+            emptyMessage.textContent = 'お問い合わせはまだありません。';
+            messagesList.append(emptyMessage);
+            return;
+        }
+
+        data.forEach(message => {
+            const entry = document.createElement('article');
+            entry.className = 'admin-inbox-entry';
+            const heading = document.createElement('div');
+            heading.className = 'admin-inbox-heading';
+            const sender = document.createElement('strong');
+            sender.textContent = message.name;
+            const timestamp = document.createElement('time');
+            timestamp.dateTime = message.created_at;
+            timestamp.textContent = new Date(message.created_at).toLocaleString('ja-JP');
+            const email = document.createElement('p');
+            email.className = 'admin-inbox-email';
+            email.textContent = message.email;
+            const body = document.createElement('p');
+            body.className = 'admin-inbox-body';
+            body.textContent = message.message;
+            heading.append(sender, timestamp);
+            entry.append(heading, email, body);
+            messagesList.append(entry);
+        });
+    } catch (error) {
+        connectionStatus.textContent = '● データベース接続エラー';
+        connectionStatus.style.color = '#d86b57';
+        const errorMessage = document.createElement('p');
+        errorMessage.textContent = 'お問い合わせを読み込めませんでした。LaragonのMySQLと設定を確認してください。';
+        messagesList.replaceChildren();
+        messagesList.append(errorMessage);
+    }
+}
+
+async function initializeDashboard() {
+    await loadMessages();
+}
+
+document.getElementById('refreshMessages').addEventListener('click', loadMessages);
+initializeDashboard();
+
+loadSchools();
+</script>
+</body>
+</html>
