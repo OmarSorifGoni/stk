@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="留学生向けの横浜市内の病院検索、外国語対応、夜間休日診療、救急、健康保険の案内。">
+    <title>病院情報 | 留学生サポートサイト</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🏥 病院情報</h1>
+        <p>横浜で医療機関を探すときに役立つ情報</p>
+    </header>
+
+    <nav aria-label="メインナビゲーション">
+        <a href="index.html">ホーム</a>
+        <a href="university.html">🎓大学情報</a>
+        <a href="senmon.html">🎓専門学校情報</a>
+        <a href="jobs.php">✨ アルバイト</a>
+        <a href="life.html">🏠生活サポート</a>
+        <a href="contact.html">📩お問い合わせ</a>
+    </nav>
+
+    <main class="hospital-page">
+        <section class="hospital-intro">
+            <p class="hospital-eyebrow">MEDICAL CARE IN YOKOHAMA</p>
+            <h2>症状に合う医療機関を見つけましょう</h2>
+            <p>診療科、診療時間、対応言語は医療機関ごとに異なります。受診前に公式情報を確認し、必要に応じて電話で問い合わせてください。</p>
+        </section>
+
+        <section class="hospital-grid" aria-label="病院情報">
+            <article class="hospital-card" id="find-hospital">
+                <span class="hospital-icon" aria-hidden="true">🔍</span>
+                <h3>病院を探す</h3>
+                <p>エリアや診療科から医療機関を探せます。横浜市の名簿では病院、一般診療所、歯科診療所を確認できます。</p>
+                <div class="hospital-links">
+                    <a href="https://www.iryou.teikyouseido.mhlw.go.jp/znk-web/juminkanja/S2340/initialize" target="_blank" rel="noopener noreferrer">医療情報ネットで検索 <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/iryo/anzenshien/iryomeibo/iryoumeibo.html" target="_blank" rel="noopener noreferrer">横浜市の医療機関名簿を見る <span aria-hidden="true">↗</span></a>
+                </div>
+                <p class="hospital-update-note">市の名簿は2026年8月20日更新。2026年8月1日時点で開設している施設を掲載しています。</p>
+            </article>
+
+            <article class="hospital-card" id="languages">
+                <span class="hospital-icon" aria-hidden="true">🌏</span>
+                <h3>外国語対応病院</h3>
+                <p>横浜市は、外国人患者を受け入れる医療機関の情報を案内しています。</p>
+                <ul class="hospital-language-list" aria-label="対応言語の例">
+                    <li>英語</li><li>中国語</li><li>ネパール語</li><li>韓国語</li><li>ポルトガル語</li><li>スペイン語</li><li>タイ語</li><li>ベトナム語</li><li>タガログ語</li><li>ロシア語</li><li>ウクライナ語</li>
+                </ul>
+                <p>対応言語や対応方法は施設ごとに異なり、受診時に通訳がいるとは限りません。必ず事前に確認してください。</p>
+                <a href="https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/iryo/seisaku/iryokokusaika/kokusai_20210827_2.html" target="_blank" rel="noopener noreferrer">横浜市の外国人向け医療情報を見る <span aria-hidden="true">↗</span></a>
+            </article>
+
+            <article class="hospital-card" id="departments">
+                <span class="hospital-icon" aria-hidden="true">🩺</span>
+                <h3>診療科から探す</h3>
+                <p>内科、歯科、皮膚科、眼科、耳鼻咽喉科など、症状に合う診療科を選んで検索できます。</p>
+                <a href="https://www.iryou.teikyouseido.mhlw.go.jp/znk-web/juminkanja/S2340/initialize" target="_blank" rel="noopener noreferrer">診療科・地域を指定して検索 <span aria-hidden="true">↗</span></a>
+            </article>
+
+            <article class="hospital-card" id="after-hours">
+                <span class="hospital-icon" aria-hidden="true">🌙</span>
+                <h3>夜間・休日</h3>
+                <p>横浜市の案内で、毎日の夜間急病センターや日曜・祝日などの休日急患診療所を確認できます。診療科や受付時間は受診前に電話でご確認ください。</p>
+                <a href="https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/iryo/seisaku/iryokokusaika/kokusai_20210827_2.html" target="_blank" rel="noopener noreferrer">夜間・休日診療の一覧を見る <span aria-hidden="true">↗</span></a>
+            </article>
+
+            <article class="hospital-card hospital-emergency" id="emergency">
+                <span class="hospital-icon" aria-hidden="true">🚑</span>
+                <h3>緊急時</h3>
+                <p>命に関わる急病や大きなけがは119番へ。横浜市では英語、中国語、韓国語、ポルトガル語、スペイン語、ベトナム語の通訳を介した119番通報に対応しています。</p>
+                <p>通訳につながるまで電話を切らずにお待ちください。ネパール語など、案内にない言語の対応は市の最新情報をご確認ください。</p>
+                <div class="hospital-links">
+                    <a class="hospital-emergency-call" href="tel:119">119番に電話する <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.city.yokohama.lg.jp/lang/residents/en/about-us/other/disaster/dialing_119/foreign119.html" target="_blank" rel="noopener noreferrer">外国語での119番通報について <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
+
+            <article class="hospital-card" id="insurance">
+                <span class="hospital-icon" aria-hidden="true">💳</span>
+                <h3>健康保険</h3>
+                <p>日本に住民登録をしている人は、勤務先の健康保険などに加入している場合を除き、国民健康保険の対象となることがあります。加入条件や手続きは区役所の案内で確認してください。</p>
+                <a href="https://www.city.yokohama.lg.jp/lang/residents/en/insurance/kokuhoenglish.html" target="_blank" rel="noopener noreferrer">国民健康保険の加入・脱退案内（英語） <span aria-hidden="true">↗</span></a>
+            </article>
+        </section>
+
+        <aside class="hospital-reminder">
+            <h2>受診前の確認</h2>
+            <p>このページは医療機関の一覧そのものではありません。診療日、診療時間、受付条件、対応言語は変わることがあります。横浜市の名簿・各施設の案内を確認し、受診前に医療機関へお問い合わせください。</p>
+        </aside>
+    </main>
+
+    <footer>
+        <p>© 2026 留学生サポートサイト</p>
+    </footer>
+</body>
+</html>
