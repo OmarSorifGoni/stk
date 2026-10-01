@@ -50,6 +50,14 @@
 <script>
 const form = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
+const query = new URLSearchParams(window.location.search);
+const requestedJob = query.get('job');
+const requestedProperty = query.get('property');
+if (requestedJob || requestedProperty) {
+	form.elements.message.value = requestedJob
+		? `アルバイト「${requestedJob}」について問い合わせます。`
+		: `物件「${requestedProperty}」について問い合わせます。`;
+}
 form.addEventListener('submit', async event => {
 	event.preventDefault();
 

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="横浜で暮らす留学生向けの電車、バス、ICカード、定期券、空港アクセス、自転車情報。">
+    <title>交通情報 | 留学生サポートサイト</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🚆 交通情報</h1>
+        <p>横浜で生活する留学生のために、<br>電車・バス・ICカード・空港アクセスなどの<br>基本的な交通情報を紹介します。</p>
+    </header>
+
+    <nav aria-label="メインナビゲーション">
+        <a href="index.html">ホーム</a>
+        <a href="university.html">🎓大学情報</a>
+        <a href="senmon.html">🎓専門学校情報</a>
+        <a href="jobs.php">✨ アルバイト</a>
+        <a href="life.html">🏠生活サポート</a>
+        <a href="contact.html">📩お問い合わせ</a>
+    </nav>
+
+    <main class="transport-page">
+        <section class="transport-intro">
+            <p class="transport-eyebrow">GETTING AROUND YOKOHAMA</p>
+            <h2>行き先に合わせて、移動手段を選ぼう</h2>
+            <p>路線・運賃・運行状況は変更されることがあります。出発前に各交通機関の最新情報を確認してください。</p>
+        </section>
+
+        <section class="transport-grid" aria-label="交通情報">
+            <article class="transport-card" id="trains">
+                <span class="transport-icon" aria-hidden="true">🚆</span>
+                <h3>電車・地下鉄</h3>
+                <p>横浜駅にはJR線、東急線、京急線、相鉄線、横浜市営地下鉄が乗り入れています。路線図と乗換案内で行き先を確認しましょう。</p>
+                <a href="https://www.yokohamajapan.com/information/getting-around-yokohama/" target="_blank" rel="noopener noreferrer">横浜の路線図を見る <span aria-hidden="true">↗</span></a>
+            </article>
+
+            <article class="transport-card" id="buses">
+                <span class="transport-icon" aria-hidden="true">🚌</span>
+                <h3>バス情報</h3>
+                <p>乗車口や運賃の支払い方法は路線によって異なります。乗る前に行先表示、乗り方、運賃・経路を公式案内で確認してください。</p>
+                <a href="https://www.city.yokohama.lg.jp/kotsu/bus/" target="_blank" rel="noopener noreferrer">横浜市営バスの乗り方・運賃 <span aria-hidden="true">↗</span></a>
+            </article>
+
+            <article class="transport-card" id="ic-cards">
+                <span class="transport-icon" aria-hidden="true">💳</span>
+                <h3>ICカード</h3>
+                <p>Suica・PASMOは対応する電車やバスの運賃支払いに使えます。購入方法、チャージ、利用できるエリアを確認しましょう。</p>
+                <div class="transport-link-row">
+                    <a href="https://www.jreast.co.jp/multi/en/welcomesuica/" target="_blank" rel="noopener noreferrer">Suica <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.pasmo.co.jp/visitors/en/" target="_blank" rel="noopener noreferrer">PASMO <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
+
+            <article class="transport-card" id="commuter-passes">
+                <span class="transport-icon" aria-hidden="true">🎫</span>
+                <h3>定期券</h3>
+                <p>通学定期券は学校や利用区間などの条件があります。購入資格、必要書類、販売窓口を学校と利用する鉄道会社に確認してください。</p>
+                <a href="https://www.yokohamajapan.com/information/discount-tickets-passes/" target="_blank" rel="noopener noreferrer">横浜のお得な乗車券を見る <span aria-hidden="true">↗</span></a>
+            </article>
+
+            <article class="transport-card" id="airports">
+                <span class="transport-icon" aria-hidden="true">✈️</span>
+                <h3>空港アクセス</h3>
+                <p>羽田空港からは京急線などで横浜へアクセスできます。成田空港から横浜への鉄道経路も、乗換や所要時間を確認して計画しましょう。</p>
+                <div class="transport-link-row">
+                    <a href="https://tokyo-haneda.com/en/access/train/" target="_blank" rel="noopener noreferrer">羽田空港の鉄道案内 <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.narita-airport.jp/en/access/train/" target="_blank" rel="noopener noreferrer">成田空港の鉄道案内 <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
+
+            <article class="transport-card" id="bicycles">
+                <span class="transport-icon" aria-hidden="true">🚲</span>
+                <h3>自転車</h3>
+                <p>駅周辺の駐輪場を利用し、歩道や駐輪禁止場所への放置は避けましょう。交通ルールや地域の駐輪案内を確認してください。</p>
+                <a href="https://www.city.yokohama.lg.jp/kurashi/machizukuri-kankyo/kotsu/bicycle/" target="_blank" rel="noopener noreferrer">横浜市の自転車情報 <span aria-hidden="true">↗</span></a>
+            </article>
+        </section>
+
+        <section class="route-search" aria-labelledby="route-search-title">
+            <div>
+                <p class="transport-eyebrow">TRANSIT ROUTE</p>
+                <h2 id="route-search-title">乗換案内</h2>
+                <p>出発駅と到着駅を選ぶと、公共交通機関の経路検索が開きます。</p>
+            </div>
+            <form action="https://www.google.com/maps/dir/" method="get" target="_blank" rel="noopener noreferrer">
+                <input type="hidden" name="api" value="1">
+                <input type="hidden" name="travelmode" value="transit">
+                <label for="route-origin">出発駅</label>
+                <select id="route-origin" name="origin">
+                    <option value="Yokohama Station, Yokohama, Japan" selected>横浜駅</option>
+                    <option value="Kannai Station, Yokohama, Japan">関内駅</option>
+                    <option value="Sakuragicho Station, Yokohama, Japan">桜木町駅</option>
+                    <option value="Shin-Yokohama Station, Yokohama, Japan">新横浜駅</option>
+                </select>
+                <label for="route-destination">到着駅</label>
+                <select id="route-destination" name="destination">
+                    <option value="Kannai Station, Yokohama, Japan" selected>関内駅</option>
+                    <option value="Yokohama Station, Yokohama, Japan">横浜駅</option>
+                    <option value="Sakuragicho Station, Yokohama, Japan">桜木町駅</option>
+                    <option value="Shin-Yokohama Station, Yokohama, Japan">新横浜駅</option>
+                </select>
+                <button type="submit">ルートを検索 <span aria-hidden="true">↗</span></button>
+            </form>
+        </section>
+
+        <aside class="official-transport-guide">
+            <h2>公式の交通ガイド</h2>
+            <p>横浜公式観光サイトでは、横浜の電車路線図やバス・タクシーなどの移動情報を確認できます。</p>
+            <a href="https://www.yokohamajapan.com/information/" target="_blank" rel="noopener noreferrer">横浜公式観光サイトの交通情報を見る <span aria-hidden="true">↗</span></a>
+        </aside>
+    </main>
+
+    <footer>
+        <p>© 2026 留学生サポートサイト</p>
+    </footer>
+</body>
+</html>
