@@ -8,49 +8,162 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body data-page="index">
 
     <header>
-        <h1>留学生サポートサイト</h1>
-        <p>日本で生活する留学生を応援します</p>
+        <div class="lang-switcher" aria-label="Language selector">
+            <button class="lang-btn" type="button" data-lang="ja">日本語</button>
+            <button class="lang-btn" type="button" data-lang="en">English</button>
+        </div>
+        <h1 data-i18n="siteTitle">留学生サポートサイト</h1>
+        <p data-i18n="siteSubtitle">日本で生活する留学生を応援います</p>
     </header>
 
     <nav>
         <a href="admin.html">⚙ 管理画面</a>
-        <a href="university.html">🎓大学情報</a>
-        <a href="senmon.html">🎓専門学校情報</a>
-        <a href="job.html">✨ アルバイト</a>
-        <a href="life.html">🏠生活サポート</a>
-        <a href="contact.html">📩お問い合わせ</a>
-
+        <a href="university.html" data-i18n="nav.university">🎓大学情報</a>
+        <a href="senmon.html" data-i18n="nav.senmon">🎓専門学校情報</a>
+        <a href="job.html" data-i18n="nav.job">✨ アルバイト</a>
+        <a href="life.html" data-i18n="nav.life">🏠生活サポート</a>
+        <a href="contact.html" data-i18n="nav.contact">📩お問い合わせ</a>
     </nav>
 
     <section class="hero">
-        <h1>Welcome International Students</h1>
-        <p>大学・仕事・生活情報を簡単に探せます。</p>
-        <a href="university.html" class="button">大学情報を見る</a>
+        <h1 data-i18n="heroTitle">Welcome International Students</h1>
+        <p data-i18n="heroText">大学・仕事・生活情報を簡単に探せます。</p>
+        <a href="university.html" class="button" data-i18n="heroButton">大学情報を見る</a>
     </section>
 
     <div class="container">
-        <div class="card">
-            <h2>🌍 多言語対応</h2>
-            <p>日本語・English・বাংলা に対応できます。</p>
-        </div>
-
-        <div class="card">
-            <h2>📱 スマホ完全対応</h2>
-            <p>スマホ・タブレット・PCで快適に使えます。</p>
-        </div>
-
-        <div class="card">
-            <h2>🤖 AIチャット対応可能</h2>
-            <p>将来的にAI相談機能を追加できます。</p>
+        <div class="card chat-card">
+            <h2 data-i18n="card3Title">🤖 AIチャット</h2>
+            <div class="chat-box" aria-live="polite">
+                <div class="chat-message bot" data-i18n="chatGreeting">
+                    こんにちは。留学・学校・生活のことで相談できます。何を知りたいですか？
+                </div>
+            </div>
+            <div class="chat-input-wrap">
+                <input id="chatInput" type="text" data-i18n-placeholder="chatPlaceholder" placeholder="例: 大学選びを教えて" maxlength="200">
+                <button id="chatSend" type="button" data-i18n="chatSend">送信</button>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 留学生サポートサイト</p>
+        <p data-i18n="footer">© 2026 留学生サポートサイト</p>
     </footer>
+
+    <script src="lang.js"></script>
+    <script>
+        const chatInput = document.getElementById('chatInput');
+        const chatSend = document.getElementById('chatSend');
+        const chatBox = document.querySelector('.chat-box');
+
+        function addMessage(text, type) {
+            const msg = document.createElement('div');
+            msg.className = `chat-message ${type}`;
+            msg.textContent = text;
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function fallbackReply(message, lang) {
+            const text = message.toLowerCase();
+            if (lang === 'en') {
+                if (/school|university|study|major/.test(text)) {
+                    return 'When choosing a school, compare tuition, location, major, and international student support. Tell me your field or goals.';
+                }
+                if (/house|apartment|dorm|live|home/.test(text)) {
+                    return 'For housing, compare rent, commute time, safety, and whether you want a dormitory or apartment.';
+                }
+                if (/job|work|part-time|career/.test(text)) {
+                    return 'For part-time work, check your available hours and Japanese level. Convenience stores and restaurants are often good starting choices.';
+                }
+                if (/japanese|jlpt|n1|n2|n3/.test(text)) {
+                    return 'For Japanese learning, study daily conversation, interview practice, and JLPT preparation based on your current level.';
+                }
+                if (/hello|hi|good morning/.test(text)) {
+                    return 'Hello! I can help with study, school, work, or life in Japan.';
+                }
+                return 'Please tell me a bit more about your question. I can help with school, housing, jobs, or daily life in Japan.';
+            }
+
+            if (/大学|学校|専門|進学/.test(text)) {
+                return '学校選びでは、学費、勤務地、専攻、留学生サポートの有無を確認すると安心です。まずは希望の分野を教えてください。';
+            }
+            if (/住|寮|アパート|ホーム/.test(text)) {
+                return '住まいは、家賃、駅までの距離、治安、寮かアパートかを比較すると選びやすくなります。';
+            }
+            if (/仕事|バイト|アルバイト|就職/.test(text)) {
+                return 'アルバイトは、勤務時間と語学レベルの両方を確認するのが大事です。コンビニや飲食店は比較的入りやすいです。';
+            }
+            if (/日本語|jlpt|n1|n2|n3/.test(text)) {
+                return '日本語のレベルに合わせて、日常会話・面接対策・JLPT対策を進めると効果的です。どのレベルを目指していますか？';
+            }
+            if (/病院|医療|ケガ|体調/.test(text)) {
+                return '病院選びでは、外国人対応があるか、最寄り駅、診療時間を確認すると安心です。';
+            }
+            if (/こんにちは|hi|hello/.test(text)) {
+                return 'こんにちは！留学生活や学校選びのことなら、何でも相談してください。';
+            }
+            if (/ありがとう|thanks/.test(text)) {
+                return 'どういたしまして。必要なら次も一緒に考えます。';
+            }
+
+            return 'ご相談内容をもう少し詳しく教えてください。学校選び、住まい、仕事、生活など、どのテーマでも対応できます。';
+        }
+
+        async function sendChat() {
+            const value = chatInput.value.trim();
+            if (!value) return;
+
+            addMessage(value, 'user');
+            chatInput.value = '';
+            chatSend.disabled = true;
+            chatSend.textContent = document.documentElement.lang === 'en' ? 'Sending...' : '送信中...';
+
+            const chatEndpoint = 'chat.php';
+
+            try {
+                const response = await fetch(chatEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: value,
+                        lang: document.documentElement.lang || 'ja'
+                    })
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Gemini API request failed.');
+                }
+                if (!data.reply) {
+                    throw new Error(document.documentElement.lang === 'en'
+                        ? 'Gemini returned an empty answer.'
+                        : 'Geminiから空の回答が返されました。');
+                }
+                addMessage(data.reply, 'bot');
+            } catch (error) {
+                addMessage(error.message || (document.documentElement.lang === 'en'
+                    ? 'Could not connect to the chat server.'
+                    : 'チャットサーバーに接続できませんでした。'), 'bot');
+            } finally {
+                chatSend.disabled = false;
+                chatSend.textContent = document.documentElement.lang === 'en' ? 'Send' : '送信';
+            }
+        }
+
+        chatSend.addEventListener('click', sendChat);
+        chatInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                sendChat();
+            }
+        });
+    </script>
 
 </body>
 

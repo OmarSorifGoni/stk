@@ -6,18 +6,22 @@
 <title>大学情報</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-page="university">
 
 <header>
-<h1>大学情報</h1>
+<div class="lang-switcher" aria-label="Language selector">
+    <button class="lang-btn" type="button" data-lang="ja">日本語</button>
+    <button class="lang-btn" type="button" data-lang="en">English</button>
+</div>
+<h1 data-i18n="pageTitle.university">大学情報</h1>
 </header>
 <nav>
-<a href="index.html">ホーム</a>
-<a href="university.html">🎓大学情報</a>
-<a href="senmon.html">🎓専門学校情報</a>
-<a href="job.html">✨ アルバイト</a>
-<a href="life.html">🏠生活サポート</a>
-<a href="contact.html">📩お問い合わせ</a>
+<a href="index.html" data-i18n="nav.home">ホーム</a>
+<a href="university.html" data-i18n="nav.university">🎓大学情報</a>
+<a href="senmon.html" data-i18n="nav.senmon">🎓専門学校情報</a>
+<a href="job.html" data-i18n="nav.job">✨ アルバイト</a>
+<a href="life.html" data-i18n="nav.life">🏠生活サポート</a>
+<a href="contact.html" data-i18n="nav.contact">📩お問い合わせ</a>
 </nav>
 <div class="container">
 
@@ -622,3 +626,6 @@
 <a class="btn" href="https://www.kokushikan.ac.jp/" target="_blank">大学Website</a>
 </div>
 </div>
+<script src="lang.js"></script>
+</body>
+</html>
