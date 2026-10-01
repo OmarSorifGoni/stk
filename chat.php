@@ -116,10 +116,10 @@ if ($message === '' || mb_strlen($message, 'UTF-8') > 2000) {
 $apiKey = getGeminiKey();
 
 if ($apiKey === '') {
-    respond(503, [
-        'error' => $lang === 'en'
-            ? 'Gemini API key is not set. Add your key to config.php or db-config.php.'
-            : 'Gemini APIキーが未設定です。config.php または db-config.php に設定してください。',
+    respond(200, [
+        'reply' => fallbackReply($message, $lang),
+        'source' => 'fallback',
+        'reason' => 'missing_api_key',
     ]);
 }
 
@@ -200,7 +200,8 @@ $failureMessage = $httpStatus === 503
         : ($lang === 'en'
             ? 'Gemini returned HTTP ' . $httpStatus . '. ' . $providerMessage
             : 'GeminiからHTTP ' . $httpStatus . ' が返されました。' . $providerMessage));
-respond($httpStatus === 503 ? 503 : 502, [
-    'error' => $failureMessage,
-    'upstream_status' => $httpStatus ?: null,
+respond(200, [
+    'reply' => fallbackReply($message, $lang),
+    'source' => 'fallback',
+    'reason' => $failureMessage,
 ]);
