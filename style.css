@@ -1,5 +1,9 @@
 /* ===== BODY ===== */
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body{
     margin:0;
     font-family:'Segoe UI',sans-serif;
@@ -11,35 +15,51 @@ body{
     );
 
     min-height:100vh;
+    padding-bottom:40px;
 }
 
 /* ===== HEADER ===== */
 
 header{
     text-align:center;
-    padding:60px 20px;
+    padding:48px 20px 30px;
     color:white;
 }
 
 header h1{
     font-size:55px;
     margin:0;
+    line-height:1.15;
 }
 
 /* ===== NAV ===== */
 
 nav{
     background:white;
-    padding:20px;
+    padding:18px 20px;
     text-align:center;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px 18px;
 }
 
 nav a{
     color:#2563eb;
     text-decoration:none;
-    margin:0 20px;
     font-size:22px;
     font-weight:bold;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:6px 10px;
+    border-radius:10px;
+    transition:background 0.2s ease, transform 0.2s ease;
+}
+
+nav a:hover{
+    background:#eff6ff;
+    transform:translateY(-1px);
 }
 
 .lang-switcher {
@@ -71,9 +91,9 @@ nav a{
 
 .container{
 
-    width:90%;
+    width:min(90%, 1200px);
 
-    margin:auto;
+    margin:0 auto;
 
     padding:50px 0;
 
@@ -101,6 +121,7 @@ nav a{
     transition:0.4s;
 
     animation:show 0.8s ease;
+    min-height:100%;
 }
 
 /* hover */
@@ -138,7 +159,9 @@ nav a{
 
 .btn{
 
-    display:inline-block;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
 
     margin-top:20px;
 
@@ -217,6 +240,7 @@ nav a{
     border-radius: 12px;
     padding: 14px 16px;
     font-size: 16px;
+    outline: none;
 }
 
 .chat-input-wrap button {
@@ -257,7 +281,12 @@ nav a{
         font-size:38px;
     }
 
+    nav{
+        padding:14px 12px;
+    }
+
     nav a{
+        font-size:18px;
 
         display:block;
 
