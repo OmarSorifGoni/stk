@@ -2,8 +2,15 @@
 $jobs = [
     [
         'id' => 'convenience-store',
-        'icon' => '🏪',
         'title' => 'コンビニスタッフ',
+        'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/7-Eleven_Glow_%2824450652778%29.jpg/960px-7-Eleven_Glow_%2824450652778%29.jpg',
+        'image_alt' => '日本のセブン‐イレブン店舗の夜景',
+        'image_credit' => [
+            'name' => 'Aleister Kelman / Wikimedia Commons',
+            'url' => 'https://commons.wikimedia.org/wiki/File:7-Eleven_Glow_(24450652778).jpg',
+            'license' => 'CC BY 2.0',
+            'license_url' => 'https://creativecommons.org/licenses/by/2.0/',
+        ],
         'location' => '神奈川県横浜市',
         'station' => '横浜駅',
         'wage' => '時給 ¥1,200〜',
@@ -14,8 +21,15 @@ $jobs = [
     ],
     [
         'id' => 'restaurant',
-        'icon' => '🍜',
         'title' => 'レストランスタッフ',
+        'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Torikizoku-Nishio.jpg/960px-Torikizoku-Nishio.jpg',
+        'image_alt' => '鳥貴族 西尾店の外観',
+        'image_credit' => [
+            'name' => 'HQA02330 / Wikimedia Commons',
+            'url' => 'https://commons.wikimedia.org/wiki/File:Torikizoku-Nishio.jpg',
+            'license' => 'CC BY-SA 4.0',
+            'license_url' => 'https://creativecommons.org/licenses/by-sa/4.0/',
+        ],
         'location' => '神奈川県横浜市中区',
         'station' => '関内駅',
         'wage' => '時給 ¥1,250〜',
@@ -37,7 +51,7 @@ $jobs = [
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="jobs-theme">
     <header>
         <h1>留学生歓迎のアルバイト</h1>
         <p>勤務地やシフト、日本語レベルから仕事を探せます</p>
@@ -47,7 +61,7 @@ $jobs = [
         <a href="index.html">ホーム</a>
         <a href="university.html">🎓大学情報</a>
         <a href="senmon.html">🎓専門学校情報</a>
-        <a href="jobs.php" aria-current="page">✨ アルバイト</a>
+        <a href="jobs.php" aria-current="page">アルバイト</a>
         <a href="life.html">🏠生活サポート</a>
         <a href="contact.html">📩お問い合わせ</a>
     </nav>
@@ -62,8 +76,11 @@ $jobs = [
         <section class="jobs-grid" aria-label="アルバイト一覧">
             <?php foreach ($jobs as $job): ?>
                 <article class="job-card">
+                    <img class="job-card-image" src="<?= htmlspecialchars($job['image'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($job['image_alt'], ENT_QUOTES, 'UTF-8') ?>">
+                    <?php if (isset($job['image_credit'])): ?>
+                        <p class="job-image-credit">写真: <a href="<?= htmlspecialchars($job['image_credit']['url'], ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer"><?= htmlspecialchars($job['image_credit']['name'], ENT_QUOTES, 'UTF-8') ?></a>・<a href="<?= htmlspecialchars($job['image_credit']['license_url'], ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer"><?= htmlspecialchars($job['image_credit']['license'], ENT_QUOTES, 'UTF-8') ?></a></p>
+                    <?php endif; ?>
                     <div class="job-card-heading">
-                        <span class="job-icon" aria-hidden="true"><?= htmlspecialchars($job['icon'], ENT_QUOTES, 'UTF-8') ?></span>
                         <div>
                             <p class="job-category">留学生歓迎</p>
                             <h3><?= htmlspecialchars($job['title'], ENT_QUOTES, 'UTF-8') ?></h3>
