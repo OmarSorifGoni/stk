@@ -539,6 +539,119 @@
     </div>
 
 </section>
+<p id="managedSchoolsStatus" role="status" hidden></p>
 <script src="lang.js"></script>
+<script>
+const schoolCards = document.querySelector('.container');
+const managedSchoolsStatus = document.getElementById('managedSchoolsStatus');
+
+function normalizeSchoolName(name) {
+    return name.replace(/専門学校\s*$/, '').trim();
+}
+
+function updateManagedSchoolCard(card, school, number) {
+    const heading = card.querySelector('h2');
+    const headingParts = heading.textContent.match(/^(\D*)\s*(\d+)\./);
+    heading.textContent = `${headingParts?.[1]?.trim() || '🏫'} ${headingParts?.[2] || number}.${school.name}`;
+
+    const location = [...card.querySelectorAll('p')].find(paragraph => paragraph.textContent.trim().startsWith('📍'));
+    if (location) location.textContent = `📍 ${school.region}`;
+
+    const details = [
+        [school.description, ''],
+        [school.jlpt_requirement, '📘 '],
+        [school.eju_requirement, '📝 '],
+        [school.english_requirement, '🌏 '],
+        [school.tuition, '💰 学費：']
+    ].filter(([value]) => value);
+
+    if (details.length) {
+        card.querySelectorAll('p').forEach(paragraph => {
+            if (paragraph !== location) paragraph.remove();
+        });
+        const websiteButton = card.querySelector('.btn');
+        details.forEach(([value, prefix]) => {
+            const paragraph = document.createElement('p');
+            paragraph.textContent = `${prefix}${value}`;
+            card.insertBefore(paragraph, websiteButton);
+        });
+    }
+
+    if (school.website_url) {
+        const websiteButton = card.querySelector('.btn');
+        if (websiteButton) {
+            websiteButton.href = school.website_url;
+            websiteButton.target = '_blank';
+            websiteButton.rel = 'noopener noreferrer';
+        }
+    }
+}
+
+function createManagedSchoolCard(school, number) {
+    const card = document.createElement('article');
+    card.className = 'card';
+    const heading = document.createElement('h2');
+    heading.textContent = `🏫 ${number}.${school.name}`;
+    card.append(heading);
+
+    const location = document.createElement('p');
+    location.textContent = `📍 ${school.region}`;
+    card.append(location);
+
+    const details = [
+        [school.description, ''],
+        [school.jlpt_requirement, '📘 '],
+        [school.eju_requirement, '📝 '],
+        [school.english_requirement, '🌏 '],
+        [school.tuition, '💰 学費：']
+    ];
+    details.forEach(([value, prefix]) => {
+        if (!value) return;
+        const paragraph = document.createElement('p');
+        paragraph.textContent = `${prefix}${value}`;
+        card.append(paragraph);
+    });
+
+    if (school.website_url) {
+        const website = document.createElement('a');
+        website.className = 'btn';
+        website.href = school.website_url;
+        website.target = '_blank';
+        website.rel = 'noopener noreferrer';
+        website.textContent = '学校Website';
+        card.append(website);
+    }
+    return card;
+}
+
+async function loadManagedSchools() {
+    try {
+        const response = await fetch('public-schools.php?category=%E5%B0%82%E9%96%80%E5%AD%A6%E6%A0%A1', { cache: 'no-store' });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || '専門学校情報を読み込めませんでした');
+
+        let nextNumber = schoolCards.querySelectorAll('.card').length + 1;
+        result.schools.forEach(school => {
+            const existingCard = [...schoolCards.querySelectorAll('.card')].find(card => {
+                const heading = card.querySelector('h2');
+                const cardName = heading?.textContent.replace(/^\s*.*?\d+\.\s*/, '').trim() ?? '';
+                return normalizeSchoolName(cardName) === normalizeSchoolName(school.name);
+            });
+            if (existingCard) {
+                updateManagedSchoolCard(existingCard, school, nextNumber);
+                return;
+            }
+            schoolCards.append(createManagedSchoolCard(school, nextNumber));
+            nextNumber += 1;
+        });
+    } catch (error) {
+        managedSchoolsStatus.hidden = false;
+        managedSchoolsStatus.textContent = '管理画面で登録した専門学校情報を読み込めませんでした。時間をおいて再度ご確認ください。';
+        console.error(error);
+    }
+}
+
+loadManagedSchools();
+</script>
 </body>
 </html>

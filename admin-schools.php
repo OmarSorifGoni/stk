@@ -18,7 +18,9 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $schools = $pdo->query(
-            'SELECT id, name, category, region, status, updated_at FROM schools ORDER BY updated_at DESC, id DESC'
+            'SELECT id, name, category, region, description, jlpt_requirement, eju_requirement, '
+            . 'english_requirement, tuition, website_url, status, updated_at '
+            . 'FROM schools ORDER BY updated_at DESC, id DESC'
         )->fetchAll();
         echo json_encode(['schools' => $schools], JSON_UNESCAPED_UNICODE);
         exit;
@@ -37,19 +39,38 @@ try {
         'name' => trim((string) ($input['name'] ?? '')),
         'category' => trim((string) ($input['category'] ?? '')),
         'region' => trim((string) ($input['region'] ?? '')),
+        'description' => trim((string) ($input['description'] ?? '')),
+        'jlpt_requirement' => trim((string) ($input['jlpt_requirement'] ?? '')),
+        'eju_requirement' => trim((string) ($input['eju_requirement'] ?? '')),
+        'english_requirement' => trim((string) ($input['english_requirement'] ?? '')),
+        'tuition' => trim((string) ($input['tuition'] ?? '')),
+        'website_url' => trim((string) ($input['website_url'] ?? '')),
         'status' => trim((string) ($input['status'] ?? 'draft')),
     ];
 
     if ($school['name'] === '' || mb_strlen($school['name'], 'UTF-8') > 200
         || !in_array($school['category'], ['大学', '専門学校'], true)
         || $school['region'] === '' || mb_strlen($school['region'], 'UTF-8') > 160
+        || mb_strlen($school['description'], 'UTF-8') > 500
+        || mb_strlen($school['jlpt_requirement'], 'UTF-8') > 120
+        || mb_strlen($school['eju_requirement'], 'UTF-8') > 160
+        || mb_strlen($school['english_requirement'], 'UTF-8') > 160
+        || mb_strlen($school['tuition'], 'UTF-8') > 160
+        || mb_strlen($school['website_url'], 'UTF-8') > 2048
+        || ($school['website_url'] !== '' && (
+            filter_var($school['website_url'], FILTER_VALIDATE_URL) === false
+            || !in_array(strtolower((string) parse_url($school['website_url'], PHP_URL_SCHEME)), ['http', 'https'], true)
+        ))
         || !in_array($school['status'], ['published', 'draft'], true)) {
         respond(422, ['error' => '入力内容を確認してください']);
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $statement = $pdo->prepare(
-            'INSERT INTO schools (name, category, region, status) VALUES (:name, :category, :region, :status)'
+            'INSERT INTO schools (name, category, region, description, jlpt_requirement, eju_requirement, '
+            . 'english_requirement, tuition, website_url, status) '
+            . 'VALUES (:name, :category, :region, :description, :jlpt_requirement, :eju_requirement, '
+            . ':english_requirement, :tuition, :website_url, :status)'
         );
         $statement->execute($school);
         respond(201, ['id' => (int) $pdo->lastInsertId()]);
@@ -61,7 +82,10 @@ try {
     }
 
     $statement = $pdo->prepare(
-        'UPDATE schools SET name = :name, category = :category, region = :region, status = :status WHERE id = :id'
+        'UPDATE schools SET name = :name, category = :category, region = :region, '
+        . 'description = :description, jlpt_requirement = :jlpt_requirement, eju_requirement = :eju_requirement, '
+        . 'english_requirement = :english_requirement, tuition = :tuition, website_url = :website_url, '
+        . 'status = :status WHERE id = :id'
     );
     $statement->execute($school + ['id' => $id]);
     $check = $pdo->prepare('SELECT id FROM schools WHERE id = :id');

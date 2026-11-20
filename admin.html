@@ -41,6 +41,15 @@
         <label>学校名<input name="name" type="text" maxlength="200" required></label>
         <label>カテゴリー<select name="category" required><option value="大学">大学</option><option value="専門学校">専門学校</option></select></label>
         <label>地域<input name="region" type="text" maxlength="160" placeholder="例: 東京都新宿区" required></label>
+        <fieldset class="admin-school-details">
+            <legend>学校の詳細情報（公開ページに表示）</legend>
+            <label>紹介文<input name="description" type="text" maxlength="500" placeholder="例: 日本トップレベル大学"></label>
+            <label>日本語要件<input name="jlpt_requirement" type="text" maxlength="120" placeholder="例: N1推奨"></label>
+            <label>EJU要件<input name="eju_requirement" type="text" maxlength="160" placeholder="例: EJU高得点必要"></label>
+            <label>英語要件<input name="english_requirement" type="text" maxlength="160" placeholder="例: 英語力必要"></label>
+            <label>学費<input name="tuition" type="text" maxlength="160" placeholder="例: 約54万円"></label>
+            <label>公式サイト<input name="website_url" type="url" maxlength="2048" placeholder="https://example.ac.jp/"></label>
+        </fieldset>
         <label>公開状態<select name="status" required><option value="draft">下書き</option><option value="published">公開中</option></select></label>
         <p id="schoolFormStatus" role="status" aria-live="polite"></p>
         <div class="admin-school-form-actions"><button id="cancelSchoolButton" class="admin-school-cancel" type="button">キャンセル</button><button id="saveSchoolButton" class="admin-primary-button" type="submit">保存</button></div>
@@ -139,6 +148,12 @@ function openSchoolDialog(school = null) {
     schoolForm.elements.name.value = school?.name ?? '';
     schoolForm.elements.category.value = school?.category ?? '大学';
     schoolForm.elements.region.value = school?.region ?? '';
+    schoolForm.elements.description.value = school?.description ?? '';
+    schoolForm.elements.jlpt_requirement.value = school?.jlpt_requirement ?? '';
+    schoolForm.elements.eju_requirement.value = school?.eju_requirement ?? '';
+    schoolForm.elements.english_requirement.value = school?.english_requirement ?? '';
+    schoolForm.elements.tuition.value = school?.tuition ?? '';
+    schoolForm.elements.website_url.value = school?.website_url ?? '';
     schoolForm.elements.status.value = school?.status ?? 'draft';
     document.getElementById('schoolDialogTitle').textContent = school ? '学校情報を編集' : '学校を追加';
     schoolFormStatus.textContent = '';

@@ -35,7 +35,7 @@
 }
 
 #schoolDialog {
-    width: min(480px, calc(100vw - 32px));
+    width: min(620px, calc(100vw - 32px));
     max-height: calc(100vh - 32px);
     padding: 0;
     border: 0;
@@ -50,13 +50,38 @@
 
 .admin-school-form {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
     padding: 26px;
 }
 
 .admin-school-form h2 {
+    grid-column: 1 / -1;
     margin: 0 0 4px;
     font-size: 21px;
+}
+
+.admin-school-details {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    min-width: 0;
+    margin: 0;
+    padding: 14px;
+    border: 1px solid #e1e6ef;
+    border-radius: 6px;
+}
+
+.admin-school-details[hidden] {
+    display: none;
+}
+
+.admin-school-details legend {
+    padding: 0 6px;
+    color: #40506b;
+    font-size: 13px;
+    font-weight: 700;
 }
 
 .admin-school-form label {
@@ -76,6 +101,20 @@
     background: #fff;
     color: #17233d;
     font: inherit;
+}
+
+.admin-school-form > label,
+.admin-school-form > p,
+.admin-school-form-actions {
+    grid-column: 1 / -1;
+}
+
+.admin-school-form .admin-school-details label {
+    min-width: 0;
+}
+
+.admin-school-form .admin-school-details input {
+    min-width: 0;
 }
 
 .admin-school-form-actions {
@@ -104,4 +143,11 @@
 #schoolStatusMessage {
     color: #b34d42;
     font-size: 13px;
+}
+
+@media (max-width: 520px) {
+    .admin-school-form,
+    .admin-school-details {
+        grid-template-columns: 1fr;
+    }
 }
