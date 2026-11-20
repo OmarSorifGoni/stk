@@ -13,7 +13,7 @@ SELECT * FROM (
     SELECT '中央大学', '大学', '東京都八王子市', '法学部が有名', 'N2以上', '面接あり', '留学生歓迎', '115万円', 'https://www.chuo-u.ac.jp/', 'published' UNION ALL
     SELECT '法政大学', '大学', '東京都千代田区', '留学生歓迎', 'N2以上', '面接あり', '留学生サポートあり', '120万円', 'https://www.hosei.ac.jp/', 'published' UNION ALL
     SELECT '日本大学', '大学', '東京都千代田区', '学部数が多い', 'N2以上', '', '留学生歓迎', '110万円', 'https://www.nihon-u.ac.jp/', 'published' UNION ALL
-    SELECT '東洋大学', '大学', '東京都文京区', '学費：約100万円', 'N2以上', '面接あり', '留学生サポートあり', '学費比較的安い', 'https://www.toyo.ac.jp/', 'published' UNION ALL
+    SELECT '東洋大学', '大学', '東京都文京区', '学費比較的安い', 'N2以上', '面接あり', '留学生サポートあり', '100万円', 'https://www.toyo.ac.jp/', 'published' UNION ALL
     SELECT '駒澤大学', '大学', '東京都世田谷区', '仏教系大学', 'N2以上', '面接あり', '留学生歓迎', '110万円', 'https://www.komazawa-u.ac.jp/', 'published' UNION ALL
     SELECT '専修大学', '大学', '東京都千代田区', '経済・商学人気', 'N2以上', '', '留学生歓迎', '105万円', 'https://www.senshu-u.ac.jp/', 'published' UNION ALL
     SELECT '神奈川大学', '大学', '神奈川県横浜市', '留学生多数', 'N2以上', '', '留学生が多い', '100万円', 'https://www.kanagawa-u.ac.jp/', 'published' UNION ALL
@@ -77,7 +77,7 @@ SELECT * FROM (
     SELECT '日本電子専門学校', '専門学校', '東京都新宿区', 'IT・AI・ゲーム', '留学生条件：N2推奨', '', '', '', 'https://www.jec.ac.jp/', 'published' UNION ALL
     SELECT '東京モード学園', '専門学校', '東京都新宿区', 'ファッション・デザイン', '留学生条件：N2程度', '', '', '', 'https://www.mode.ac.jp/tokyo', 'published' UNION ALL
     SELECT '専門学校東京スクールオブビジネス', '専門学校', '東京都渋谷区', '経営・ペット・IT', '留学生条件：日本語試験あり', '', '', '', 'https://www.tsb-yyg.ac.jp/', 'published' UNION ALL
-    SELECT '東京スクールオブミュージック', '専門学校', '25.東京都江戸川区', '音楽・ダンス', '', '留学生条件：実技面接あり', '', '', 'https://www.tsm.ac.jp/', 'published' UNION ALL
+    SELECT '東京スクールオブミュージック', '専門学校', '東京都江戸川区', '音楽・ダンス', '', '留学生条件：実技面接あり', '', '', 'https://www.tsm.ac.jp/', 'published' UNION ALL
     SELECT '日本航空大学校', '専門学校', '神奈川県横浜市', '航空・整備', '留学生条件：N2以上', '', '', '', 'https://www.jaa-tech.jp/', 'published' UNION ALL
     SELECT '湘央医学技術専門学校', '専門学校', '神奈川県綾瀬市', '医療技術', '留学生条件：N2程度', '', '', '', 'https://sho-oh.ac.jp/', 'published' UNION ALL
     SELECT '横浜デザイン学院', '専門学校', '神奈川県横浜市', 'デザイン・イラスト', '留学生条件：N2推奨', '', '', '', 'https://www.ydc.ac.jp/', 'published' UNION ALL
@@ -93,5 +93,5 @@ SELECT * FROM (
     SELECT '横浜観光専門学校', '専門学校', '神奈川県横浜市', '観光・ホテル', '', '留学生条件：面接あり', '', '', '', 'published' UNION ALL
     SELECT '日本映画大学専門部', '専門学校', '神奈川県川崎市', '映画・映像', '留学生条件：N2程度', '', '', '', 'https://www.eiga.ac.jp/', 'published' UNION ALL
     SELECT '湘南医療福祉専門学校', '専門学校', '神奈川県横浜市', '医療・福祉', '留学生条件：N2以上', '', '', '', 'https://www.smw.ac.jp/', 'published'
-) AS seed
+) AS seed (name, category, region, description, jlpt_requirement, eju_requirement, english_requirement, tuition, website_url, status)
 WHERE NOT EXISTS (SELECT 1 FROM schools WHERE schools.name = seed.name AND schools.category = seed.category);
